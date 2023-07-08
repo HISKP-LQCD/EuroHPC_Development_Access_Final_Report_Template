@@ -41,6 +41,8 @@
 \setsansfont{Arial}
 \setmonofont{Courier New Bold}[Scale=0.9]
 \usepackage{wasysym}
+\usepackage{lipsum}
+\usepackage[linecolor=blue]{mdframed}
 
 \pagestyle{fancy}
 \usepackage{ifthen}
@@ -97,9 +99,17 @@
 \AtEndDvi{\edef\@currentlabel{\thepageaux}\label{\currentauxref}}
 \makeatother
 
+%% this is a hack required by xelatex, which seems to always render the text inside
+%% an mdframed in black... 
+\newenvironment{jubox}
+  {
+    \begin{mdframed}
+    \globalcolor{blue}
+  }
+  {
+    \end{mdframed}
+  }
 
-%\showinstructionsfalse %% Suppresses template instructions
-\showinstructionstrue %% Shows template instructions
 
 \titleformat{\section}
   {\normalfont\fontsize{14}{16.8}\bfseries\selectfont}{\thesection}{1em}{}[{\color{oliv}\titlerule[1pt]}]
@@ -112,7 +122,6 @@
 
 \titleformat{\paragraph}%[runin]
   {\normalfont\it\fontsize{14}{16.8}\selectfont}{\theparagraph}{0.5em}{}%[: \qquad]
-
 
 \titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{6pt}
@@ -165,8 +174,6 @@
 \DeclareBibliographyCategory{fullcited}
 \newcommand{\mybibexclude}[1]{\addtocategory{fullcited}{#1}}
 
-\usepackage[linecolor=blue]{mdframed}
-
 \usepackage{xparse}
 \NewDocumentCommand\Nf{mgg}{N\textsubscript{f}=#1\IfNoValueTF{#2}{}{+#2}\IfNoValueTF{#3}{}{+#3}}
 \NewDocumentCommand\vol{mg}{#1\textsuperscript{3}\IfNoValueTF{#2}{}{×#2}}
@@ -215,6 +222,9 @@
 
 \AtBeginDocument{\globalcolor{blue}}
 
+%\showinstructionsfalse %% Suppresses template instructions
+\showinstructionstrue %% Shows template instructions
+
 \begin{document}
 
 {\fontsize{20}{32} \selectfont\textbf{EuroHPC Joint Undertaking (JU) Development \\Access}}
@@ -229,10 +239,10 @@ Type of project granted: Development Access -- code development and optimization
 
 \instructions{Please fill in the information in the box below.}
 
-\begin{mdframed}
-  %% mdframed with xelatex seems to be buggy: need to set the text colour again
-  \textcolor{blue}{EHPC-DEV-2022D08-013}
-\end{mdframed}
+\begin{jubox}
+  %% jubox with xelatex seems to be buggy: need to set the text colour again
+  EHPC-DEV-2022D08-013
+\end{jubox}
 
 \subsection{Period of access to the EuroHPC JU facilities}
 
@@ -287,9 +297,9 @@ Type of project granted: Development Access -- code development and optimization
 
 \instructions{Please fill in the information in the box below.}
 
-\begin{mdframed}
-  \textcolor{blue}{Project title}
-\end{mdframed}
+\begin{jubox}
+  Project title
+\end{jubox}
 
 \subsection{Main research field(s)}
 
@@ -310,21 +320,18 @@ Type of project granted: Development Access -- code development and optimization
 
 \instructions{Please list all team members and corresponding affiliations that were involved in the project.}
 
-\begin{mdframed}
-\textcolor{blue}{%
+\begin{jubox}
   Person X, Institution Y \\
   Person Z, Institution W
-}
-\end{mdframed}
+\end{jubox}
 
 \subsection{Summary of the project}
 
 \instructions{Please fill in the field with the same text used in the application form (maximum 300 words).}
 
-\begin{mdframed}
-\textcolor{blue}{%
-}  
-\end{mdframed}
+\begin{jubox}
+  \lipsum[1-3]
+\end{jubox}
 
 \section{Main features of the code}
 
@@ -332,10 +339,60 @@ Type of project granted: Development Access -- code development and optimization
 
 \instructions{Please fill in the information in the box below.}
 
-\begin{mdframed}
-\textcolor{blue}{%
-}
-\end{mdframed}
+\begin{jubox}
+  Name of the code
+\end{jubox}
+
+\subsection{Type of the code distribution}
+
+\instructions{Please fill in the information in the box below (e.g. open source, commercial, academic, etc.).}
+
+\begin{jubox}
+\end{jubox}
+
+\subsection{Computational problem executed}
+
+\instructions{Please fill in the information in the box below (e.g. N-body problem, Navier-stoles equation, etc.)}
+
+\begin{jubox}
+\end{jubox}
+
+\subsection{Computational method}
+
+\instructions{Please fill in the information in the box below (e.g., FEM, FVM, PIC, spectral methods, etc.)}
+
+\begin{jubox}
+\end{jubox}
+
+\subsection{Kind of parallelism used}
+
+\instructions{Please fill in the information in the box below (e.g., MPI, OpenMP, MPI/OpenMP, pthreads, embarassingly parallelism, etc.)}
+
+\begin{jubox}
+\end{jubox}
+
+\subsection{Main libraries used, version and lagnuage. Usage of /usr/local libraries.}
+
+\instructions{Please fill in the information in the box below: main libraries (e.g., FFTW, MKL, BLAS, LAPACK, etc.), language (e.g., Fortran, C, C++, etc.).}
+
+\begin{jubox}
+\end{jubox}
+
+\subsection{Other software used on the EuroHPC JU systems. Usage of post-processing or pre-processing tools.}
+
+\instructions{Please fill in the information in the box below.}
+
+\begin{jubox}
+\end{jubox}
+
+\section{Compilation step}
+
+\subsection{How is the program compiled?}
+
+\instructions{Please fill in the information in the box below (e.g., makefile, script, etc.).}
+
+\begin{jubox}
+\end{jubox}
 
 \end{document}
 
